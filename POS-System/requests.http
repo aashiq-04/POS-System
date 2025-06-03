@@ -1,0 +1,18 @@
+###
+GET http://localhost:8080/products
+
+
+###
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "name": "Dates",
+  "price": 150,
+  "stock": 100
+}
+###
+DELETE http://localhost:8080/products/1
+
+###
+GET http://localhost:8080/bills
