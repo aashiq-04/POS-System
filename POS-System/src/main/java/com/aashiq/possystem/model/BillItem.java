@@ -11,6 +11,7 @@ public class BillItem {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Product product;
 
