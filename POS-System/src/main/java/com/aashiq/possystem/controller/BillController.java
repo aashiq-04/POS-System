@@ -18,11 +18,16 @@ public class BillController {
     public BillController(BillService billService) {
         this.billService = billService;
     }
+
+
     @PostMapping
     public Bill createBill(@RequestBody List<BillItem> items)
     {
-        return billService.createBill(items);
+        System.out.println("Recieved items: " + items);
+        return billService.createBillNew(items);
     }
+
+
     @Transactional
     @GetMapping
     public List<Bill> getAllBills() {
