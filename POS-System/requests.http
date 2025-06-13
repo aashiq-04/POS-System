@@ -16,3 +16,17 @@ DELETE http://localhost:8080/products/1
 
 ###
 GET http://localhost:8080/bills
+
+###
+POST http://localhost:8080/bills
+Content-Type: application/json
+{
+  "items": [
+    {
+      "product_id": 1,
+      "quantity": 3,
+      "price": 90
+    }
+  ],
+  "totalAmount": 900
+}

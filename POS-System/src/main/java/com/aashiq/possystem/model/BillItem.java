@@ -1,6 +1,7 @@
 package com.aashiq.possystem.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -15,7 +16,7 @@ public class BillItem {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Product product;
 
-    private int quantity;
+    private double quantity;
     private double price;
 
     @ManyToOne
@@ -39,11 +40,11 @@ public class BillItem {
         this.product = product;
     }
 
-    public int getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 

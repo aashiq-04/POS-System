@@ -1,10 +1,9 @@
 package com.aashiq.possystem.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -15,7 +14,28 @@ public class Product {
     private Integer id;
     private String name;
     private Double price;
-//    private Integer stock;
+//    private String unit;
+//    private Boolean isWeighed;
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+//    public Boolean getWeighed() {
+//        return isWeighed;
+//    }
+//
+//    public void setWeighed(Boolean weighed) {
+//        isWeighed = weighed;
+//    }
+//
+//    public String getUnit() {
+//        return unit;
+//    }
+//
+//    public void setUnit(String unit) {
+//        this.unit = unit;
+//    }
 
     public Integer getId() {
         return id;
@@ -41,23 +61,28 @@ public class Product {
         this.price = price;
     }
 
-//    public int getStock() {
-//        return stock;
-//    }
-//
-//    public void setStock(int stock) {
-//        this.stock = stock;
-//    }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return id == product.id && Double.compare(price, product.price) == 0 && Objects.equals(name, product.name);
+        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(price, product.price);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, name, price);
+    }
+
+    @OneToMany(mappedBy = "product")
+    @JsonIgnore
+    private Collection<BillItem> billItem;
+
+    public Collection<BillItem> getBillItem() {
+        return billItem;
+    }
+
+    public void setBillItem(Collection<BillItem> billItem) {
+        this.billItem = billItem;
     }
 }

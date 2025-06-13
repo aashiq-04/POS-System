@@ -14,7 +14,7 @@ public class Bill {
 
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<BillItem> item;
 
