@@ -14,7 +14,7 @@ public class Product {
     private Integer id;
     private String name;
     private Double price;
-//    private String unit;
+    private String unit;
 //    private Boolean isWeighed;
 
     public void setPrice(Double price) {
@@ -29,13 +29,13 @@ public class Product {
 //        isWeighed = weighed;
 //    }
 //
-//    public String getUnit() {
-//        return unit;
-//    }
-//
-//    public void setUnit(String unit) {
-//        this.unit = unit;
-//    }
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 
     public Integer getId() {
         return id;
@@ -66,12 +66,12 @@ public class Product {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(price, product.price);
+        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(price, product.price) && Objects.equals(unit, product.unit);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price);
+        return Objects.hash(id, name, price, unit);
     }
 
     @OneToMany(mappedBy = "product")
