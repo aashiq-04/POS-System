@@ -9,7 +9,8 @@ Content-Type: application/json
 {
   "name": "Dates",
   "price": 150,
-  "stock": 100
+  "stock": 100,
+  "unit": "1kg"
 }
 ###
 DELETE http://localhost:8080/products/1
