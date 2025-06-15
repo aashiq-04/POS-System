@@ -33,5 +33,4 @@ Content-Type: application/json
 }
 
 
-###
-GET http://localhost:8080/analytics?start=2025-06-01&end=2025-06-15
+
