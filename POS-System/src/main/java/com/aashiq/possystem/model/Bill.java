@@ -1,9 +1,6 @@
 package com.aashiq.possystem.model;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 @Entity
