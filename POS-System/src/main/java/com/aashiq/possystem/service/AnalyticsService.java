@@ -2,10 +2,6 @@ package com.aashiq.possystem.service;
 
 import com.aashiq.possystem.repository.BillItemRepository;
 import com.aashiq.possystem.repository.BillRepository;
-import com.aashiq.possystem.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
