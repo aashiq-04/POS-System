@@ -15,10 +15,5 @@ public interface BillRepository extends JpaRepository<Bill, Integer> {
     List<Bill> findAllWithProductDetails();
 
 
-    //Analytics Queries:
-    @Query("SELECT SUM(b.totalAmout) FROM Bill b WHERE b.createdAt BETWEEN :start AND :end")
-    Double getTotalRevenueBetweenDates(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 
-    @Query("SELECT COUNT(b) FROM Bill b WHERE b.createdAt BETWEEN :start AND :end")
-    Long getBillCountBetweenDates(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 }

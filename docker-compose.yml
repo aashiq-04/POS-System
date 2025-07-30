@@ -1,0 +1,92 @@
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:latest
+    container_name: postgres-POS
+    environment:
+      POSTGRES_USER: aashiq
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: pos_system
+      PGDATA: /data/postgres
+    volumes:
+      - db:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - db
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aashiq -d pos_system"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Spring Boot Backend
+  backend:
+    build:
+      context: ./POS-System
+      dockerfile: Dockerfile
+    container_name: pos-backend
+    environment:
+      SPRING_PROFILES_ACTIVE: development
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/pos_system
+      SPRING_DATASOURCE_USERNAME: aashiq
+      SPRING_DATASOURCE_PASSWORD: password
+      SERVER_PORT: 8080
+    ports:
+      - "8080:8080"
+    networks:
+      - db
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8080/actuator/health",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # React Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: pos-frontend
+    ports:
+      - "3000:80"
+    networks:
+      - db
+    depends_on:
+      - backend
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--tries=1",
+          "--spider",
+          "http://localhost:80/health",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+networks:
+  db:
+    driver: bridge
+
+volumes:
+  db:

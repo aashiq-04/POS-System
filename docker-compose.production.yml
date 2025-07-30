@@ -1,0 +1,63 @@
+version: "3.8"
+
+services:
+  # Spring Boot Backend
+  backend:
+    image: ${REGISTRY:-ghcr.io}/${IMAGE_NAME:-your-username}/pos-system}/backend:${TAG:-latest}
+    container_name: pos-backend
+    environment:
+      SPRING_PROFILES_ACTIVE: production
+      # Use external database - no local PostgreSQL needed
+      SPRING_DATASOURCE_URL: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      SERVER_PORT: 8080
+    ports:
+      - "8080:8080"
+    networks:
+      - pos-network
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8080/actuator/health",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # React Frontend
+  frontend:
+    image: ${REGISTRY:-ghcr.io}/${IMAGE_NAME:-your-username}/pos-system}/frontend:${TAG:-latest}
+    container_name: pos-frontend
+    ports:
+      - "80:80"
+    networks:
+      - pos-network
+    depends_on:
+      - backend
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--tries=1",
+          "--spider",
+          "http://localhost:80/health",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+networks:
+  pos-network:
+    driver: bridge
