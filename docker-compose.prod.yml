@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres-POS
+    environment:
+      POSTGRES_USER: aashiq
+      POSTGRES_PASSWORD: password
+      PGDATA: /data/postgres
+    volumes:
+      - db:/data/postgres
+    ports:
+      - "5332:5432"
+    networks:
+      - pos-net
+    restart: unless-stopped
+
+  backend:
+    image: ghcr.io/YOUR_GITHUB_USERNAME/pos-backend:latest
+    container_name: pos-backend
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres
+      SPRING_DATASOURCE_USERNAME: aashiq
+      SPRING_DATASOURCE_PASSWORD: password
+    ports:
+      - "8080:8080"
+    networks:
+      - pos-net
+    restart: unless-stopped
+
+  frontend:
+    image: ghcr.io/YOUR_GITHUB_USERNAME/pos-frontend:latest
+    container_name: pos-frontend
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    networks:
+      - pos-net
+    restart: unless-stopped
+
+volumes:
+  db:
+
+networks:
+  pos-net:
+    driver: bridge
