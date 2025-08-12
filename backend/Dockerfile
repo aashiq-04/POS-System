@@ -1,12 +1,24 @@
-# backend/Dockerfile
-FROM maven:3.9.6-eclipse-temurin-17 AS build
-WORKDIR /app
-RUN mvn clean package -DskipTests
-COPY pom.xml .
-COPY src ./src
-
-FROM eclipse-temurin:17-jre
-WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# ---- Build Stage ----
+    FROM maven:3.9.6-eclipse-temurin-17 AS build
+    WORKDIR /app
+    
+    # Copy pom.xml first to leverage Docker cache for dependencies
+    COPY pom.xml .
+    RUN mvn dependency:go-offline -B
+    
+    # Copy the actual source code
+    COPY src ./src
+    
+    # Package the application (skip tests for speed)
+    RUN mvn clean package -DskipTests
+    
+    # ---- Runtime Stage ----
+    FROM eclipse-temurin:17-jre
+    WORKDIR /app
+    
+    # Copy only the built jar from the build stage
+    COPY --from=build /app/target/*.jar app.jar
+    
+    # Run the application
+    ENTRYPOINT ["java", "-jar", "app.jar"]
+    
