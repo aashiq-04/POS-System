@@ -1,0 +1,116 @@
+.billing-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+h1,
+h2 {
+  color: #222;
+  margin-bottom: 15px;
+}
+
+.billing-body {
+  display: flex;
+  gap: 20px;
+  height: 75vh;
+}
+
+.product-column {
+  flex: 1.6;
+  overflow-y: auto;
+  padding-right: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.cart-column {
+  flex: 1.2;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(150, 26, 26, 0.1);
+  overflow-y: auto;
+}
+
+.search-box {
+  width: 95%;
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.product-item,
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  flex-wrap: wrap;
+}
+
+.product-name {
+  flex: 1;
+  font-weight: bold;
+}
+
+input[type="number"] {
+  width: 60px;
+  padding: 5px;
+}
+
+button {
+  padding: 6px 12px;
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0b5ed7;
+}
+
+.remove-btn {
+  background-color: #dc3545;
+}
+
+.remove-btn:hover {
+  background-color: #c82333;
+}
+
+.total-section {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.checkout-btn {
+  background-color: #28a745;
+}
+
+.checkout-btn:hover {
+  background-color: #218838;
+}
+
+.checkout-message {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.checkout-message.success {
+  color: green;
+  background-color: #e6ffe6;
+  border: 1px solid green;
+}
+
+.checkout-message.error {
+  color: red;
+  background-color: #ffe6e6;
+  border: 1px solid red;
+}
