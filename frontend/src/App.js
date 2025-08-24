@@ -11,7 +11,7 @@ function App() {
           <Link to="/">Billing</Link>
           <Link to="/products">Product Management</Link>
           <Link to="/bills">Bill History</Link>
-          <Link to="/test">Test</Link>
+          {/* <Link to="/test">Test</Link> */}
         </nav>
         <Routes>
           <Route path="/products" element={<ProductsPage />} />

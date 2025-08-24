@@ -1,0 +1,24 @@
+[33m9771843[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Removed Security Dependency from Spring
+M	.gitignore
+M	backend/src/main/java/com/aashiq/possystem/config/SecurityConfig.java
+[33m5442cce[m Removed Security Dependency from Spring
+M	.gitignore
+[33m6876c0a[m Removed Security Dependency from Spring
+M	backend/pom.xml
+[33m784cb0b[m Port Issues Resolved
+M	backend/Dockerfile
+M	backend/pom.xml
+M	backend/src/main/java/com/aashiq/possystem/config/SecurityConfig.java
+[33ma608247[m Port Issues Resolved
+M	backend/src/main/java/com/aashiq/possystem/config/SecurityConfig.java
+[33m1bc1050[m Port Issues Resolved
+M	backend/src/main/resources/application.properties
+[33m8d437fd[m Port Issues Resolved
+M	backend/src/main/resources/application.properties
+[33ma7a007e[m Fix DB Config for Render
+M	backend/Dockerfile
+[33m601f055[m Fix DB Config for Render
+M	backend/Dockerfile
+M	backend/src/main/java/com/aashiq/possystem/PosSystemApplication.java
+[33m3bbf5d3[m Actuator check added
+M	backend/src/main/java/com/aashiq/possystem/config/SecurityConfig.java
